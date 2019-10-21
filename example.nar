@@ -4,5 +4,5 @@
 [[header]]
     "header": "scene2"
     "event1": ["dogwhines.mp3", "dog whine", "dog whined"]
-    "event2": ["cardrives.mp3", "car drives by", "car drove by"]
+    "event2": ["cardrives.mp3", "car drive by", "car drove by"]
 [[end]]
