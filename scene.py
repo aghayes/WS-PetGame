@@ -3,7 +3,6 @@ import json
 
 class Scene:
 
-
     def __init__(self, json_string_array):
         self.events = []
         scene_info = {}
@@ -24,3 +23,9 @@ class Scene:
                 continue
             else:
                 self.events.append(scene_info[key])
+
+    def geteventaudio(self, index):
+        return self.events[index][0]
+
+    def getallevents(self):
+        return self.events
