@@ -22,7 +22,7 @@ class Update:
         self.label = tkinter.Label(master, text=question[0])
         self.prompt = tkinter.Label(master, text=prompt)
 
-<<<<<<< HEAD
+
     def run(self):
         while True:
             # sets the value of prompt and label and then packs them into the frame
@@ -96,20 +96,4 @@ engineThread.start()
 
 # tkinter mainloop
 root.mainloop()
-=======
-question1 = question_box.order([scenes[0].events[0], scenes[0].events[1]])
-s_answer = input(":")
-if s_answer == question1:
-    print("good job")
-else:
-    print("sorry")
-new_array = sound_manager.open_audio([scenes[1].events[1][0], scenes[1].events[0][0]])
-clip2 = sound_manager.concatenate_audio(new_array)
-sound_manager.play(clip2, '2')
-question2 = question_box.order([scenes[1].events[1], scenes[1].events[0]])
-s_answer = input(":")
-if s_answer == question2:
-    print("good job")
-else:
-    print("sorry")
->>>>>>> 7711ba3e3fe52e8f34d5e2470f685f39caad440e
+

@@ -1,21 +1,15 @@
 from pydub import *
 from pydub.playback import *
-<<<<<<< HEAD
+
 import sounddevice
 import scipy.io.wavfile
 import os
 import speech_recognition
-=======
-
->>>>>>> 7711ba3e3fe52e8f34d5e2470f685f39caad440e
 
 
-<<<<<<< HEAD
+
 class SoundManager:
-=======
-    file_paths = []
-    audio_clips = []
->>>>>>> 7711ba3e3fe52e8f34d5e2470f685f39caad440e
+
 
     def open_audio(self, file_path_array):
         self.file_paths = file_path_array
@@ -36,7 +30,7 @@ class SoundManager:
     def play(audio_clip, clip_number):
         play(audio_clip)
         audio_clip.export("clip{}.mp3".format(clip_number), 'mp3')
-<<<<<<< HEAD
+
 
     # this is the basic idea of the beep function but I need to find the actual file and add the path and extension
     # @staticmethod
@@ -70,5 +64,4 @@ class SoundManager:
             return r.recognize_sphinx(audio)
         except speech_recognition.UnknownValueError as e:
             return 'failed to recognize audio'
-=======
->>>>>>> 7711ba3e3fe52e8f34d5e2470f685f39caad440e
+

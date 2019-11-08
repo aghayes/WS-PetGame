@@ -16,11 +16,10 @@ class ParseJson:
                 self.scenes.append(Scene(scene))
                 scene = []
                 continue
-<<<<<<< HEAD
+
             # if there is no [[header]] we simply add the line to the scene array which is just a bunch of json
             # we add the necessary { and } here so that the .ntv file is cleaner visually
-=======
->>>>>>> 7711ba3e3fe52e8f34d5e2470f685f39caad440e
+
             scene.append('{'+line+'}')
 
     def get_scenes(self):
