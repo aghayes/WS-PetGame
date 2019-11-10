@@ -3,6 +3,7 @@ import sounds
 import files
 import threading
 import tkinter
+from tkinter import ttk
 import time
 import datetime
 
@@ -48,9 +49,10 @@ def engine():
     sound_manager.record_audio(7, 'answer1.wav')
 
     # pass whatever file name you used in sound_manager.record_audio, make sure it is a pcm wav file
-    speech_from_answer = sound_manager.recognize_speech('answer1.wav')
+    speech_from_answer = sound_manager.recognize_speech('answer1.wav', question[1])
+    print(question[1])
     print(speech_from_answer)
-    if question_box.check(answer=speech_from_answer, question=question):
+    if speech_from_answer:
         prompt = "good job"
     else:
         prompt = "good try"
@@ -68,9 +70,10 @@ def engine():
     prompt = "Record your answer!"
     sound_manager.record_audio(7, 'answer2.wav')
 
-    speech_from_answer = sound_manager.recognize_speech('answer2.wav')
+    speech_from_answer = sound_manager.recognize_speech('answer2.wav', question[1])
+    print(question[1])
     print(speech_from_answer)
-    if question_box.check(speech_from_answer, question):
+    if speech_from_answer:
         prompt = "good job"
     else:
         prompt = "good try"
@@ -83,6 +86,8 @@ def engine():
 
 
 root = tkinter.Tk()
+style = ttk.Style()
+style.theme_use('clam')
 update = Update(root)
 
 # creates a separate thread that runs the update.run function so that other stuff can happen while the root.mainloop is

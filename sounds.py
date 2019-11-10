@@ -9,7 +9,7 @@ import speech_recognition
 
 
 class SoundManager:
-
+    audio_clips = []
 
     def open_audio(self, file_path_array):
         self.file_paths = file_path_array
@@ -50,7 +50,7 @@ class SoundManager:
         scipy.io.wavfile.write(output_file_path, fs, recording)
 
     @staticmethod
-    def recognize_speech(file_name):
+    def recognize_speech(file_name, keyword):
         # set up a recognizer using the speech_recognition library
         r = speech_recognition.Recognizer()
         # creates the file path from the total path and the file_name
@@ -61,7 +61,7 @@ class SoundManager:
         # uses the recognize_sphinx part of the library which requires pocketsphinx but works offline
         # returns a string
         try:
-            return r.recognize_sphinx(audio)
+            return r.recognize_sphinx(audio, keyword_entries=[(keyword, 0.9)])
         except speech_recognition.UnknownValueError as e:
-            return 'failed to recognize audio'
+            return False
 
