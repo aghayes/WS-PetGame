@@ -27,5 +27,10 @@ class Scene:
     def geteventaudio(self, index):
         return self.events[index][0]
 
+    def getallaudio(self):
+        audio_array = []
+        for event in self.events:
+            audio_array.append(event[0])
+
     def getallevents(self):
         return self.events

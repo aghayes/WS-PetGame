@@ -7,9 +7,9 @@ import os
 import speech_recognition
 
 
-
 class SoundManager:
     audio_clips = []
+    file_paths = []
 
     def open_audio(self, file_path_array):
         self.file_paths = file_path_array
@@ -20,6 +20,7 @@ class SoundManager:
 
         return self.audio_clips
 
+    @staticmethod
     def concatenate_audio(self, audio_clip_array):
         final_clip = 0
         for clip in audio_clip_array:
@@ -30,7 +31,6 @@ class SoundManager:
     def play(audio_clip, clip_number):
         play(audio_clip)
         audio_clip.export("clip{}.mp3".format(clip_number), 'mp3')
-
 
     # this is the basic idea of the beep function but I need to find the actual file and add the path and extension
     # @staticmethod
@@ -60,8 +60,11 @@ class SoundManager:
             audio = r.record(source)
         # uses the recognize_sphinx part of the library which requires pocketsphinx but works offline
         # returns a string
+        # sphinx_sens is between 0 and 1 with 1 being the most sensitive
+
+        sphinx_sens = 1
         try:
-            return r.recognize_sphinx(audio, keyword_entries=[(keyword, 0.9)])
+            return r.recognize_sphinx(audio, keyword_entries=[(keyword, sphinx_sens)])
         except speech_recognition.UnknownValueError as e:
             return False
 

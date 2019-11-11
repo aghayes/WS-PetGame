@@ -1,0 +1,5 @@
+    "header": "header title"
+    "first_event": ["path_to_clip.extension", "indefinite form i.e. dog whine", "past tense i.e. dog barked", "question i.e. who barked", "answer i.e. dog"]
+[[header]]
+    "header": "next header title"
+    "first_event": ["path_to_clip.extension", "indefinite", "past tense", "question", "answer"]

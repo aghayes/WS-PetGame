@@ -5,7 +5,7 @@ import threading
 import tkinter
 from tkinter import ttk
 import time
-import datetime
+import random
 
 question_box = questions.Questions()
 sound_manager = sounds.SoundManager()
@@ -23,7 +23,6 @@ class Update:
         self.label = tkinter.Label(master, text=question[0])
         self.prompt = tkinter.Label(master, text=prompt)
 
-
     def run(self):
         while True:
             # sets the value of prompt and label and then packs them into the frame
@@ -32,6 +31,38 @@ class Update:
             self.prompt['text'] = prompt
             self.prompt.pack()
 
+
+# question_type determines what type of question is asked or you can pass "random" to ask a random question
+def tkinterprocedure(scene, question_type):
+    audio_array = scene.getallaudio()
+    clip_array = sound_manager.open_audio(audio_array)
+    clip = sound_manager.concatenate_audio(clip_array)
+    sound_manager.play(clip, '1')
+
+    global question
+    if question_type == "random":
+        pick = random.randint(0,1)
+        if pick == 0:
+            question = question_box.order(scene.getallevents())
+        if pick == 1:
+            question = question_box.who(scene.getallevents())
+    elif question_type == "who":
+        question = question_box.who(scene.getallevents())
+    elif question_type == "order":
+        question = question_box.order(scene.getallevents())
+
+    global prompt
+    prompt = "Record your answer!"
+    answer_path = "answer.wav"
+    sound_manager.record_audio(7, answer_path)
+
+    speech_from_answer = sound_manager.recognize_speech(answer_path, question[1])
+    print(question[1])
+    print(speech_from_answer)
+    if speech_from_answer:
+        prompt = "good job"
+    else:
+        prompt = "good try"
 
 def engine():
     scenes = files.ParseJson('example.ntv').get_scenes()

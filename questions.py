@@ -21,6 +21,18 @@ class Questions:
         else:
             return False
 
+    def who(self, events):
+        # randomly picks an event from the choices
+        event_choice = random.sample(events, 1)
+
+        # asks the question
+        self.question = event_choice[0][3] + "?"
+        self.engine.say(self.question)
+        self.engine.runAndWait()
+
+        # returns the answer
+        self.answer = event_choice[0][4]
+        return (self.question,self.answer)
 
     def order(self, ordered_events):
         # takes two random events from the ordered list and saves them to event_choices
