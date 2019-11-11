@@ -13,7 +13,8 @@ class Questions:
         self.question = ''
         self.answer = ''
 
-    def check(self, answer, question):
+    @staticmethod
+    def check(answer, question):
         question_answer = question[1]
 
         if question_answer in answer:
@@ -32,7 +33,7 @@ class Questions:
 
         # returns the answer
         self.answer = event_choice[0][4]
-        return (self.question,self.answer)
+        return (self.question, self.answer)
 
     def order(self, ordered_events):
         # takes two random events from the ordered list and saves them to event_choices
@@ -51,4 +52,4 @@ class Questions:
             self.answer = "after"
         else:
             self.answer = "before"
-        return (self.question,self.answer)
+        return (self.question, self.answer)

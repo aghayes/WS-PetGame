@@ -65,6 +65,6 @@ class SoundManager:
         sphinx_sens = 1
         try:
             return r.recognize_sphinx(audio, keyword_entries=[(keyword, sphinx_sens)])
-        except speech_recognition.UnknownValueError as e:
+        except speech_recognition.UnknownValueError:
             return False
 

@@ -41,7 +41,7 @@ def tkinterprocedure(scene, question_type):
 
     global question
     if question_type == "random":
-        pick = random.randint(0,1)
+        pick = random.randint(0, 1)
         if pick == 0:
             question = question_box.order(scene.getallevents())
         if pick == 1:

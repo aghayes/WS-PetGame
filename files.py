@@ -55,7 +55,7 @@ class FileManagement:
 
         try:
             os.mkdir(total_path)
-        except FileExistsError as e:
+        except FileExistsError:
             pass
 
         # for every directory in the file_name_array move it to the directory we created then remove the old directories
