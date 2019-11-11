@@ -64,6 +64,7 @@ def tkinterprocedure(scene, question_type):
     else:
         prompt = "good try"
 
+
 def engine():
     scenes = files.ParseJson('example.ntv').get_scenes()
 
