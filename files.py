@@ -3,6 +3,7 @@ from scene import *
 import os
 import shutil
 
+
 class ParseJson:
 
     scenes = []
