@@ -21,7 +21,7 @@ class SoundManager:
         return self.audio_clips
 
     @staticmethod
-    def concatenate_audio(self, audio_clip_array):
+    def concatenate_audio(audio_clip_array):
         final_clip = 0
         for clip in audio_clip_array:
             final_clip = final_clip + clip

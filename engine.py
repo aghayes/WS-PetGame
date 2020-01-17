@@ -65,6 +65,25 @@ def tkinterprocedure(scene, question_type):
         prompt = "good try"
 
 
+def pressed(event):
+    # creates a separate thread that runs the update.run function so that other stuff can happen while the root.mainloop is
+    # still running
+    global updateThread
+    updateThread = threading.Thread(target=update.run)
+    updateThread.start()
+
+    # creates a separate thread that runs the engine function so that it can run while the root.mainloop is running
+    global engineThread
+    engineThread = threading.Thread(target=engine)
+    engineThread.start()
+
+# todo figure out how to kill the thread in a good way
+# def kill(event):
+#     global updateThread
+#     updateThread.kill()
+#     global engineThread
+#     engineThread.kill()
+
 def engine():
     scenes = files.ParseJson('example.ntv').get_scenes()
 
@@ -122,14 +141,9 @@ style = ttk.Style()
 style.theme_use('clam')
 update = Update(root)
 
-# creates a separate thread that runs the update.run function so that other stuff can happen while the root.mainloop is
-# still running
-updateThread = threading.Thread(target=update.run)
-updateThread.start()
-
-# creates a separate thread that runs the engine function so that it can run while the root.mainloop is running
-engineThread = threading.Thread(target=engine)
-engineThread.start()
+root.bind("<Left>", pressed)
+# todo fix this along with the thread killing
+# root.bind("<Destroy>", kill)
 
 # tkinter mainloop
 root.mainloop()
