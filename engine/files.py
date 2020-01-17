@@ -9,7 +9,7 @@ class ParseJson:
     scenes = []
 
     def __init__(self, file_path):
-
+        file_path = "..\\narrative\\"+file_path;
         file = open(file_path, 'r')
         scene = []
         for line in file:
@@ -33,6 +33,10 @@ class FileManagement:
     def makescenefile(folder_name, file_name_array):
         # gets the current path and appends the folder_name to create total_path so we can move files inside it
         cur_path = os.getcwd()
+        # this pulls us back one directory by removing the last folder with split and then we join everything
+        # back together
+        cur_path = cur_path.split("\\")[0:-1]
+        cur_path = "\\".join(cur_path)
         total_path = cur_path + "\\" + folder_name
 
         try:
@@ -42,7 +46,7 @@ class FileManagement:
 
         # for every file in the file_name_array move it to the directory we created
         for file_name in file_name_array:
-            file_path = cur_path + "\\" + file_name
+            file_path = cur_path + "\\engine\\" + file_name
             new_file_path = total_path + "\\" + file_name
 
             shutil.move(file_path, new_file_path)
@@ -51,6 +55,10 @@ class FileManagement:
     def makestoryfile(folder_name, file_name_array):
         # gets the current path and appends the folder_name to create total_path so we can move files inside it
         cur_path = os.getcwd()
+        # this pulls us back one directory by removing the last folder with split and then we join everything
+        # back together
+        cur_path = cur_path.split("\\")[0:-1]
+        cur_path = "\\".join(cur_path)
         total_path = cur_path + "\\" + folder_name
 
         try:

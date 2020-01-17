@@ -13,10 +13,11 @@ class SoundManager:
 
     def open_audio(self, file_path_array):
         self.file_paths = file_path_array
-
+        self.audio_clips = []
         for path in self.file_paths:
             extension = path.split('.')[1]
-            self.audio_clips.append(AudioSegment.from_file(path, extension))
+            # "..\\narrative\sounds\\" is used to navigate from the current directory to the correct storage location of the sounds
+            self.audio_clips.append(AudioSegment.from_file("..\\narrative\sounds\\"+path, extension))
 
         return self.audio_clips
 

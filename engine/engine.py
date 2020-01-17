@@ -1,6 +1,4 @@
-import questions
-import sounds
-import files
+import files, sounds, questions
 import threading
 import tkinter
 from tkinter import ttk
@@ -83,6 +81,7 @@ def pressed(event):
 #     updateThread.kill()
 #     global engineThread
 #     engineThread.kill()
+
 
 def engine():
     scenes = files.ParseJson('example.ntv').get_scenes()
