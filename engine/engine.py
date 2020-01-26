@@ -4,6 +4,7 @@ import tkinter
 from tkinter import ttk
 import time
 import random
+import os
 
 question_box = questions.Questions()
 sound_manager = sounds.SoundManager()
@@ -24,6 +25,7 @@ class Update:
     def run(self):
         while True:
             # sets the value of prompt and label and then packs them into the frame
+            global question
             self.label['text'] = question[0]
             self.label.pack()
             self.prompt['text'] = prompt
@@ -72,7 +74,8 @@ def pressed(event):
 
     # creates a separate thread that runs the engine function so that it can run while the root.mainloop is running
     global engineThread
-    engineThread = threading.Thread(target=engine)
+    ntv = "example.ntv"
+    engineThread = threading.Thread(target=general_engine, args=([ntv]))
     engineThread.start()
 
 # todo figure out how to kill the thread in a good way
@@ -81,6 +84,51 @@ def pressed(event):
 #     updateThread.kill()
 #     global engineThread
 #     engineThread.kill()
+
+
+def general_engine(ntv_name):
+    scenes = files.ParseJson(ntv_name).get_scenes()
+    story = []
+
+    for scene in scenes:
+        clip_array = []
+        clip_array = sound_manager.open_audio(scene.getallaudio())
+
+        clip = 0
+        clip = sound_manager.concatenate_audio(clip_array)
+        sound_manager.play(clip, '1')
+
+        # global variable are used here to allow things to be read between threads correctly I should probably fix that
+        # at some point but I don't want to dig into the possible solutions right now
+        if scene.header == "exposition":
+            continue
+        else:
+            global question
+            question = question_box.select_question(scene.question_type, scene.getallevents())
+
+            global prompt
+            prompt = "Record your answer!"
+            sound_manager.record_audio(6, scene.header + "_" + scene.question_type + "_answer.wav")
+
+            speech_from_answer = sound_manager.recognize_speech(scene.header + "_" + scene.question_type + "_answer.wav",
+                                                                question[1])
+            print(question[1])
+            print(speech_from_answer)
+            if speech_from_answer:
+                prompt = "Good job it was the " + question[1] + "."
+            else:
+                prompt = "Good try, but actually it was the " + question[1] + "."
+
+            # nulls question out so that it will not show in the tkinter window
+            time.sleep(3)
+            question = ('', '')
+        files.FileManagement.makescenefile(scene.header,
+                                           ['clip1.mp3', scene.header + "_" + scene.question_type + "_answer.wav"])
+        time.sleep(3)
+
+        story.append(scene.header)
+
+    files.FileManagement.makestoryfile(ntv_name.split(".")[0], story)
 
 
 def engine():
@@ -135,14 +183,20 @@ def engine():
     files.FileManagement.makestoryfile("story", ['scene 1', 'scene 2'])
 
 
+def close():
+    # kills the program, there is probably a cleaner way but I don't know it
+    os._exit(0)
+
+
 root = tkinter.Tk()
+# makes it so that the close button on the tkinter window also stops the engine thread
+root.protocol("WM_DELETE_WINDOW", close)
 style = ttk.Style()
 style.theme_use('clam')
 update = Update(root)
 
 root.bind("<Left>", pressed)
-# todo fix this along with the thread killing
-# root.bind("<Destroy>", kill)
+
 
 # tkinter mainloop
 root.mainloop()

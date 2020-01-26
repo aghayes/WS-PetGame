@@ -1,9 +1,15 @@
     "header": "scene1"
+    "question": "who"
     "event1": ["sound1.mp3", "dog bark", "dog barked", "who barked", "dog"]
     "event2": ["sound2.mp3", "door open", "door opened", "what opened", "door"]
     "event3": ["dogwhines.mp3", "dog whine", "dog whined", "who whined", "dog"]
+[[exposition]]
+    "header": "exposition"
+    "question": "exposition"
+    "clip1": ["clip.wav", "exposition", "exposition", "exposition"]
 [[header]]
     "header": "scene2"
+    "question": "order"
     "event1": ["dogwhines.mp3", "dog whine", "dog whined", "who whined", "dog"]
     "event2": ["cardrives.mp3", "car drives by", "car drove by", "what drove by", "car"]
 [[end]]

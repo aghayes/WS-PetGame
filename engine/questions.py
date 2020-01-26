@@ -22,6 +22,12 @@ class Questions:
         else:
             return False
 
+    def select_question(self, question_type, events):
+        if question_type == "who":
+            return self.who(events)
+        elif question_type == "order":
+            return self.order(events)
+
     def who(self, events):
         # randomly picks an event from the choices
         event_choice = random.sample(events, 1)

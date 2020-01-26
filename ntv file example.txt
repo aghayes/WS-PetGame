@@ -1,5 +1,11 @@
     "header": "header title"
+    "question": "the type of question to ask valid are who and order"
     "first_event": ["path_to_clip.extension", "indefinite form i.e. dog whine", "past tense i.e. dog barked", "question i.e. who barked", "answer i.e. dog"]
 [[header]]
     "header": "next header title"
+    "question": "next question type"
     "first_event": ["path_to_clip.extension", "indefinite", "past tense", "question", "answer"]
+[[another]]
+    "header": "exposition"
+    "question": "never used"
+    "exposition": ["path_to_clip.extension", "not used", "not used", "not used", "not used"]

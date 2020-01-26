@@ -11,6 +11,7 @@ class Scene:
             scene_info.update(json.loads(string))
         # initialize values from the json scene_info
         self.header = scene_info["header"]
+        self.question_type = scene_info["question"]
 
         # iterates through all values in the scene scene_info and appends the event array to self.event.
         # events are of the form event[0] is a sound clip file path, event[1] is the description in present [2] in past
@@ -21,16 +22,22 @@ class Scene:
             # used to skip the header key
             if key == 'header':
                 continue
+            elif key == "question":
+                continue
             else:
                 self.events.append(scene_info[key])
 
+    # returns an audio path from the event at index
     def geteventaudio(self, index):
         return self.events[index][0]
 
+    # returns every audio path in an array
     def getallaudio(self):
         audio_array = []
         for event in self.events:
             audio_array.append(event[0])
+        return audio_array
 
+    # returns the full array of events for this scene
     def getallevents(self):
         return self.events
