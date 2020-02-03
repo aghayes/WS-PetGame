@@ -114,16 +114,22 @@ def general_engine(ntv_name):
                                                                 question[1])
             print(question[1])
             print(speech_from_answer)
-            if speech_from_answer:
-                prompt = "Good job it was the " + question[1] + "."
-            else:
-                prompt = "Good try, but actually it was the " + question[1] + "."
+            if question[2] == 0:
+                if speech_from_answer:
+                    prompt = "Good job it was the " + question[1] + "."
+                else:
+                    prompt = "Good try, but actually it was the " + question[1] + "."
+            elif question[2] == 1:
+                if speech_from_answer:
+                    prompt = "Good job it was " + question[1] + "."
+                else:
+                    prompt = "Good try, but actually it was " + question[1] + "."
 
             # nulls question out so that it will not show in the tkinter window
             time.sleep(3)
             question = ('', '')
         files.FileManagement.makescenefile(scene.header,
-                                           ['clip1.mp3', scene.header + "_" + scene.question_type + "_answer.wav"])
+                                           ['clip1.wav', scene.header + "_" + scene.question_type + "_answer.wav"])
         time.sleep(3)
 
         story.append(scene.header)

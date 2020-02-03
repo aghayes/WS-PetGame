@@ -21,6 +21,15 @@ class SoundManager:
 
         return self.audio_clips
 
+    def open_saved_audio(self, file_path_array, curdir):
+        self.file_paths = file_path_array
+        self.audio_clips = []
+        for path in self.file_paths:
+            extension = path.split('.')[1]
+            self.audio_clips.append(AudioSegment.from_file(curdir + "\\" + path, extension))
+
+        return self.audio_clips
+
     @staticmethod
     def concatenate_audio(audio_clip_array):
         final_clip = 0
@@ -29,9 +38,13 @@ class SoundManager:
         return final_clip
 
     @staticmethod
+    def play_saved(audio_clip):
+        play(audio_clip)
+
+    @staticmethod
     def play(audio_clip, clip_number):
         play(audio_clip)
-        audio_clip.export("clip{}.mp3".format(clip_number), 'mp3')
+        audio_clip.export("clip{}.wav".format(clip_number), 'wav')
 
     # this is the basic idea of the beep function but I need to find the actual file and add the path and extension
     # @staticmethod

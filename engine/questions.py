@@ -39,7 +39,7 @@ class Questions:
 
         # returns the answer
         self.answer = event_choice[0][4]
-        return (self.question, self.answer)
+        return (self.question, self.answer, 0)
 
     def order(self, ordered_events):
         # takes two random events from the ordered list and saves them to event_choices
@@ -58,4 +58,4 @@ class Questions:
             self.answer = "after"
         else:
             self.answer = "before"
-        return (self.question, self.answer)
+        return (self.question, self.answer, 1)
