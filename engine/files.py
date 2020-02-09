@@ -66,6 +66,8 @@ class FileManagement:
         except FileExistsError:
             pass
 
+        # moves the playback.py file into the folder
+        shutil.copy(cur_path + "\\engine\\playback.py", total_path + "\\playback.py")
         # for every directory in the file_name_array move it to the directory we created then remove the old directories
         for file_name in file_name_array:
             file_path = cur_path + "\\" + file_name
