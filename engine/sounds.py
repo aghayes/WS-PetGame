@@ -59,7 +59,7 @@ class SoundManager:
         #
         # the dtype='int32' sets the datatype which ensures that the scipy.io writes it as as pcm wav file
         # if you don't include it then the speech recognition won't open the file because it only reads pcm wav files
-        recording = sounddevice.rec(int(record_length*fs), fs, channels=2, dtype='int32')
+        recording = sounddevice.rec(int(record_length*fs), fs, channels=2, dtype='int16')
         sounddevice.wait()
         scipy.io.wavfile.write(output_file_path, fs, recording)
 
