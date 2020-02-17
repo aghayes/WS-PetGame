@@ -5,7 +5,8 @@ import pyttsx3
 class Questions:
 
     def __init__(self):
-
+	# sets up the the text to speech engine that is used
+	# to speak the questions
         self.engine = pyttsx3.init()
         rate = self.engine.getProperty('rate')
         self.engine.setProperty('rate', rate-50)
@@ -22,6 +23,8 @@ class Questions:
         else:
             return False
 
+    # function that prevents the engine from having to hold the
+    # logic that takes a question_type into a fucntion call
     def select_question(self, question_type, events):
         if question_type == "who":
             return self.who(events)
