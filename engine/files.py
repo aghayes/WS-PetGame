@@ -13,7 +13,13 @@ class ParseJson:
         file = open(file_path, 'r')
         scene = []
         for line in file:
-            if re.search("\\-{2}.*\\-{2}", line):
+            if re.search("\\+{2}.*\\+{2}", line):
+                line = line.replace('+', '')
+                line = line.replace('+', '')
+                line = line.replace('\n', '')
+                self.title = line
+                continue
+            elif re.search("\\-{2}.*\\-{2}", line):
                 line = line.replace('-', '')
                 line = line.replace('-', '')
                 line = line.replace('\n', '')
@@ -28,6 +34,9 @@ class ParseJson:
             # we add the necessary { and } here so that the .ntv file is cleaner visually
 
             scene.append('{'+line+'}')
+
+    def get_title(self):
+        return self.title
 
     def get_spath(self):
         return self.spath

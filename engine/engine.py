@@ -62,6 +62,7 @@ def general_engine(ntv_name):
     f = files.ParseJson(ntv_name)
     scenes = f.get_scenes()
     sound_manager = sounds.SoundManager(f.get_spath())
+    root.title(f.get_title())
     story = []
 
     for scene in scenes:
@@ -134,7 +135,7 @@ def return_key(event):
 
 root = tkinter.Tk()
 root.iconbitmap(default='transparent.ico')
-root.title("come up with a name")
+root.title("")
 # makes it so that the close button on the tkinter window also stops the engine thread
 root.protocol("WM_DELETE_WINDOW", close)
 style = ttk.Style()
