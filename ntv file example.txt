@@ -1,3 +1,5 @@
+    ++window title++
+    --name of sound folder--
     "header": "header title"
     "question": "the type of question to ask valid are who and order"
     "first_event": ["path_to_clip.extension", "indefinite form i.e. dog whine", "past tense i.e. dog barked", "question i.e. who barked", "answer i.e. dog"]

@@ -19,8 +19,8 @@ class SoundManager:
         self.audio_clips = []
         for path in self.file_paths:
             extension = path.split('.')[1]
-            # "..\\narrative\example_sounds\\" is used to navigate from the current directory to the correct storage location
-            # of the example_sounds
+            # "..\\narrative\\"+self.path+"\\" is used to navigate from the current directory to the correct storage
+            # location of the sounds
             self.audio_clips.append(AudioSegment.from_file("..\\narrative\\"+self.spath+"\\"+path, extension))
 
         return self.audio_clips
