@@ -133,6 +133,8 @@ def return_key(event):
 
 
 root = tkinter.Tk()
+root.iconbitmap(default='transparent.ico')
+root.title("come up with a name")
 # makes it so that the close button on the tkinter window also stops the engine thread
 root.protocol("WM_DELETE_WINDOW", close)
 style = ttk.Style()
