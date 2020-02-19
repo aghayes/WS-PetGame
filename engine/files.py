@@ -12,6 +12,7 @@ class ParseJson:
         file_path = "..\\narrative\\"+file_path;
         file = open(file_path, 'r')
         scene = []
+        self.title = ''
         for line in file:
             if re.search("\\+{2}.*\\+{2}", line):
                 line = line.replace('+', '')

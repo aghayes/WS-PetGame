@@ -61,7 +61,9 @@ class Update:
 def general_engine(ntv_name):
     f = files.ParseJson(ntv_name)
     scenes = f.get_scenes()
+    # sets the path to the folder that holds the sounds
     sound_manager = sounds.SoundManager(f.get_spath())
+    # sets title from .ntv file if one isn't set in file defualt is ''
     root.title(f.get_title())
     story = []
 
