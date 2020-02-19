@@ -6,7 +6,6 @@ import time
 import os
 
 question_box = questions.Questions()
-sound_manager = sounds.SoundManager()
 global ntv
 ntv = "example.ntv"
 question = ('', '')
@@ -31,12 +30,11 @@ class Update:
                 final_path += dir + "\\"
         final_path += 'narrative\\'
         for file in os.listdir(final_path):
-            print(file[-4:])
             if file[-4:] == '.ntv':
                 options.append(file)
         self.selected_ntv = tkinter.StringVar(master)
         self.selected_ntv.set(options[0])
-        self.enter = tkinter.OptionMenu(master, self.selected_ntv, options)
+        self.enter = tkinter.OptionMenu(master, self.selected_ntv, *options)
         self.enter.pack()
         # sets up the labels we will use note question is a tuple of the form (question_text, answer)
         self.label = tkinter.Label(master, text=question[0])
@@ -61,7 +59,9 @@ class Update:
 
 
 def general_engine(ntv_name):
-    scenes = files.ParseJson(ntv_name).get_scenes()
+    f = files.ParseJson(ntv_name)
+    scenes = f.get_scenes()
+    sound_manager = sounds.SoundManager(f.get_spath())
     story = []
 
     for scene in scenes:
@@ -121,13 +121,15 @@ def return_key(event):
     global ntv
     ntv = update.selected_ntv.get()
     update.enter.destroy()
-    print(ntv)
     # creates a separate thread that runs the engine function so that it can run while the root.mainloop is running
     global engineThread
     engineThread = threading.Thread(target=general_engine, args=([ntv]))
     engineThread.start()
     global question
     question = ("Listen to the story please.", "")
+    global prompt
+    prompt = ''
+    root.unbind("<Return>")
 
 
 root = tkinter.Tk()
