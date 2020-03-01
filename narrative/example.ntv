@@ -5,6 +5,7 @@
     "event1": ["sound1.mp3", "dog bark", "dog barked", "who barked", "dog"]
     "event2": ["sound2.mp3", "door open", "door opened", "what opened", "door"]
     "event3": ["dogwhines.mp3", "dog whine", "dog whined", "who whined", "dog"]
+    "jump": "scene2"
 [[exposition]]
     "header": "exposition"
     "question": "exposition"

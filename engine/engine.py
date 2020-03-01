@@ -68,6 +68,9 @@ def general_engine(ntv_name):
     story = []
 
     for scene in scenes:
+        if scene.done:
+            continue
+
         clip_array = []
         clip_array = sound_manager.open_audio(scene.getallaudio())
 
@@ -110,6 +113,7 @@ def general_engine(ntv_name):
         time.sleep(3)
 
         story.append(scene.header)
+        scene.done = True
 
     files.FileManagement.makestoryfile(ntv_name.split(".")[0], story)
 
