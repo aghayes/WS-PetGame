@@ -2,10 +2,10 @@
 --example_sounds--
     "header": "scene1"
     "question": "who"
+    "wrong": "scene1"
     "event1": ["sound1.mp3", "dog bark", "dog barked", "who barked", "dog"]
     "event2": ["sound2.mp3", "door open", "door opened", "what opened", "door"]
     "event3": ["dogwhines.mp3", "dog whine", "dog whined", "who whined", "dog"]
-    "jump": "scene2"
 [[exposition]]
     "header": "exposition"
     "question": "exposition"
@@ -13,6 +13,7 @@
 [[header]]
     "header": "scene2"
     "question": "order"
+    "wrong": "scene1"
     "event1": ["dogwhines.mp3", "dog whine", "dog whined", "who whined", "dog"]
-    "event2": ["cardrives.mp3", "car drives by", "car drove by", "what drove by", "car"]
+    "event2": ["cardrives.mp3", "car drive past", "car drove past", "what drove by", "car"]
 [[end]]

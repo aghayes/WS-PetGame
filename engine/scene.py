@@ -12,8 +12,13 @@ class Scene:
         # initialize values from the json scene_info
         self.header = scene_info["header"]
         self.question_type = scene_info["question"]
-        self.right_jump = scene_info["jump"]
-        self.done = False
+        self.right_jump = ''
+        self.wrong_jump = ''
+        try:
+            self.right_jump = scene_info["right"]
+            self.wrong_jump = scene_info["wrong"]
+        except Exception as e:
+            pass
 
         # iterates through all values in the scene scene_info and appends the event array to self.event.
         # events are of the form event[0] is a sound clip file path, event[1] is the description in present [2] in past
@@ -25,6 +30,8 @@ class Scene:
             if key == 'header':
                 continue
             elif key == "question":
+                continue
+            elif key == "right":
                 continue
             elif key == "wrong":
                 continue

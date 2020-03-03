@@ -66,11 +66,11 @@ def general_engine(ntv_name):
     # sets title from .ntv file if one isn't set in file defualt is ''
     root.title(f.get_title())
     story = []
-
-    for scene in scenes:
-        if scene.done:
-            continue
-
+    i = 0
+    while i < len(scenes):
+        scene = scenes[i]
+        print(scene.header)
+        jump = False
         clip_array = []
         clip_array = sound_manager.open_audio(scene.getallaudio())
 
@@ -80,9 +80,7 @@ def general_engine(ntv_name):
 
         # global variable are used here to allow things to be read between threads correctly I should probably fix that
         # at some point but I don't want to dig into the possible solutions right now
-        if scene.header == "exposition":
-            continue
-        else:
+        if scene.header != "exposition":
             global question
             question = question_box.select_question(scene.question_type, scene.getallevents())
 
@@ -105,11 +103,34 @@ def general_engine(ntv_name):
                 else:
                     prompt = "Good try, but actually it was " + question[1] + "."
 
-            # nulls question out so that it will not show in the tkinter window
-            time.sleep(3)
-            question = ('', '')
-        files.FileManagement.makescenefile(scene.header,
-                                           ['clip1.wav', scene.header + "_" + scene.question_type + "_answer.wav"])
+        if speech_from_answer:
+            j = 0
+            for scene_test in scenes:
+                if scene_test.header in scene.right_jump:
+                    i = j
+                    jump = True
+                    break
+                j += 1
+        else:
+            j = 0
+            for scene_test in scenes:
+
+                if scene_test.header in scene.wrong_jump:
+                    i = j
+                    jump = True
+                    break
+                j += 1
+
+        if not jump:
+            i += 1
+
+        # nulls question out so that it will not show in the tkinter window
+        time.sleep(3)
+        question = ('', '')
+        prompt = "Keep listening!"
+        if scene.header != "exposition":
+            files.FileManagement.makescenefile(scene.header,
+                                               ['clip1.wav', scene.header + "_" + scene.question_type + "_answer.wav"])
         time.sleep(3)
 
         story.append(scene.header)
